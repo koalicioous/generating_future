@@ -29,7 +29,7 @@
             <div class="col-md-2">
                 <div class="card shadow-sm">
                     <div class="card-header text-center">
-                        <small>ALL EXPERIENCE</small>
+                        <small>RANK</small>
                     </div>
                     <div class="card-body text-center">
                         <h1><strong>{{ $events->count() }}</strong></h1>
@@ -39,7 +39,17 @@
             <div class="col-md-2">
                 <div class="card shadow-sm">
                     <div class="card-header text-center">
-                        <small>ALL EXPERIENCE</small>
+                        <small>POINTS</small>
+                    </div>
+                    <div class="card-body text-center">
+                        <h1><strong>{{ Auth::user()->point }}</strong></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card shadow-sm">
+                    <div class="card-header text-center">
+                        <small>EVENTS</small>
                     </div>
                     <div class="card-body text-center">
                         <h1><strong>{{ $events->count() }}</strong></h1>
@@ -49,7 +59,7 @@
             <div class="col-md-2">
                 <div class="card shadow-sm">
                     <div class="card-header text-center">
-                        <small>ALL EXPERIENCE</small>
+                        <small>ACHIEVEMENTS</small>
                     </div>
                     <div class="card-body text-center">
                         <h1><strong>{{ $events->count() }}</strong></h1>
