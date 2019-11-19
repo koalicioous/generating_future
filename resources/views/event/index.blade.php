@@ -17,16 +17,16 @@
             <strong>{{ session('deleted') }}</strong>
         </div>
         @endif
-        <div class="row my-3 justify-content-center">
-            <div class="col-md-8" style="color:#0c3f6b">
+        <div class="row my-4 justify-content-center">
+            <div class="col-md-10" style="color:#0c3f6b">
                 <h3><strong>Experience</strong></h3>
-            </div>
-            <div class="col-md-2">
-                <a href="/events/create" class="btn float-right btn-success">Add New</a>
+                <p>This page explains the experience you had <br> and shows the competition atmosphere in Central Language Improvement</p>
             </div>
         </div>
-        <div class="row mb-3 justify-content-center">
-            <div class="col-md-2">
+
+        <!-- RANK STATUS -->
+        <div class="row my-3 justify-content-center">
+            <div class="col-md-2 my-2">
                 <div class="card shadow-sm">
                     <div class="card-header text-center">
                         <small>RANK</small>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 my-2">
                 <div class="card shadow-sm">
                     <div class="card-header text-center">
                         <small>POINTS</small>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 my-2">
                 <div class="card shadow-sm">
                     <div class="card-header text-center">
                         <small>EVENTS</small>
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <div class="card shadow-sm">
+                <div class="card shadow-sm my-2">
                     <div class="card-header text-center">
                         <small>ACHIEVEMENTS</small>
                     </div>
@@ -67,10 +67,20 @@
                 </div>
             </div>
         </div>
+
+        <!-- EVENT PARTICIPATION -->
+        <div class="row mt-5 mb-3 justify-content-center">
+            <div class="col-md-8">
+                <h4>Event Participation</h4>
+            </div>
+            <div class="col-md-2">
+                <a href="/events/create" class="btn float-right btn-success">Add New</a>
+            </div>
+        </div>
         <div class="row mb-3 justify-content-center">
             <div class="col-md-10">
                 <div class="card shadow-sm">
-                    <div class="card-body text-center">
+                    <div class="card-body">
                         @if ( $events->count() < 1)
                             Woops! It seems that you haven't participated in any!
                         @else
@@ -171,7 +181,49 @@
                 </div>
             </div>
         </div>
+
+        <!-- COMPETITION ACHIEVEMENT -->
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-8">
+                <h4>Competition Achievement</h4>
+            </div>
+            <div class="col-md-2">
+                <a href="/achieve/create" class="btn float-right btn-success">Add New</a>
+            </div>
+        </div>
+        <div class="row my-3 justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        @if ( $competitions->count() < 1)
+                            <h4 class="text-center my-4">Whoops! It seems that you haven't made any prizes.. Keep Moving Forward!</h4>
+                        @else
+                            <table class="table">
+                                <thead class="table-head">
+                                    <th>No</th>
+                                    <th>Competition</th>
+                                    <th>Scope</th>
+                                    <th>Prize</th>
+                                    <th>Action</th>
+                                </thead>
+                        @endif
+                            @foreach ($competitions as $comeptition)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $competition->competition_name }}</td>
+                                    <td>{{ $competition->scope->event_scope_name }}</td>
+                                    <td>{{ $competition->prize->prize_name }}</td>
+                                    <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>
+                                </tr>
+                            @endforeach
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
 
     <!-- DELETE MODAL -->
     <form action="" method="post" id="deleteForm">

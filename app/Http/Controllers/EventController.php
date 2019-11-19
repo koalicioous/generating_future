@@ -7,6 +7,7 @@ use App\Event_scope;
 use App\Event_type;
 use App\Http\Requests\eventRequest;
 use App\Event;
+use App\Competition;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -22,8 +23,9 @@ class EventController extends Controller
         $events = \App\Event::where('user_id',Auth::id())->get();
         $scopes = \App\Event_scope::all();
         $types = \App\Event_type::all();
+        $competitions = \App\Competition::where('user_id',Auth::id())->get();
 
-        return view('event.index',compact('events','scopes','types'));
+        return view('event.index',compact('events','scopes','types','competitions'));
     }
 
     /**
@@ -35,6 +37,7 @@ class EventController extends Controller
     {
         $scopes = \App\Event_scope::all();
         $types = \App\Event_type::all();
+
 
         return view('event.create',compact('scopes','types'));
     }
@@ -147,5 +150,10 @@ class EventController extends Controller
         $target->delete();
 
         return redirect('/events')->with('deleted','Your Event is Succesfully deleted!');
+    }
+
+    public function sumScore($scope,$prize)
+    {
+        
     }
 }
