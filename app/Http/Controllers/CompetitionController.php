@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Competition;
 use Illuminate\Http\Request;
+use App\Event_scope;
+use App\Http\Requests\CompetitionRequest;
+use App\Prize;
+use Illuminate\Support\Facades\Auth;
 
 class CompetitionController extends Controller
 {
@@ -24,7 +28,9 @@ class CompetitionController extends Controller
      */
     public function create()
     {
-        //
+        $scopes = \App\Event_scope::all();
+        $prizes = \App\Prize::all();
+        return view('competition.create',compact('scopes','prizes'));
     }
 
     /**
@@ -33,9 +39,16 @@ class CompetitionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompetitionRequest $request)
     {
-        //
+        Competition::create([
+            'competition_name' => $request->competition_name,
+            'event_scope_id' => $request->competition_scope,
+            'prize_id' => $request->competition_prize,
+            'user_id' => $request->user_id
+        ]);
+
+        return redirect('events')->with('competition_created','Your Achievement is Successfully Listed');
     }
 
     /**

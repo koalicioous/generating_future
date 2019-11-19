@@ -19,7 +19,7 @@ class CreateCompetitionsTable extends Migration
             $table->string('competition_name');
             $table->unsignedBigInteger('event_scope_id');
 
-            $table->foreign('event_scope_id')->references('event_scope_id')->on('events');
+            $table->foreign('event_scope_id')->references('event_scope_id')->on('event_scopes');
         });
     }
 

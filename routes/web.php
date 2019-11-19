@@ -26,3 +26,6 @@ Route::get('/events/{event}/edit','EventController@edit')->name('event.edit');
 Route::post('/events/{event}/modal/update','EventController@updateModal')->name('event.update-modal');
 Route::post('/events/{event}/update','EventController@update')->name('event.update');
 Route::DELETE('/events/{event}','EventController@destroy')->name('event.delete');
+
+Route::get('/competition/create','CompetitionController@create')->name('competition.create');
+Route::post('/competition','CompetitionController@store')->name('competition.store');

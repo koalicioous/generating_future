@@ -29,7 +29,7 @@ class AddPrizeToCompetition extends Migration
      */
     public function down()
     {
-        Schema::table('competition', function (Blueprint $table) {
+        Schema::table('competitions', function (Blueprint $table) {
             //
         });
     }

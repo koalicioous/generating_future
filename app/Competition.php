@@ -12,11 +12,11 @@ class Competition extends Model
     ]);
 
     public function scope(){
-        return $this->hasOne('\App\Event_scope','event_scope_id','event_scope_id');
+        return $this->belongsTo('\App\Event_scope','event_scope_id','event_scope_id');
     }
 
     public function prize(){
-        return $this->hasOne('\App\Prize','prize_id','prize_id');
+        return $this->belongsTo('\App\Prize','prize_id','prize_id');
     }
 
 }

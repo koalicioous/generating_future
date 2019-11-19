@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container">
+        @if (session('competition_created'))
+        <div class="alert alert-success alert-block">
+            <strong>{{ session('competition_created') }}</strong>
+        </div>
+        @endif
         @if (session('saved'))
             <div class="alert alert-success alert-block">
                 <strong>{{ session('saved') }}</strong>
@@ -17,12 +22,13 @@
             <strong>{{ session('deleted') }}</strong>
         </div>
         @endif
+        <!--
         <div class="row my-4 justify-content-center">
             <div class="col-md-10" style="color:#0c3f6b">
                 <h3><strong>Experience</strong></h3>
                 <p>This page explains the experience you had <br> and shows the competition atmosphere in Central Language Improvement</p>
             </div>
-        </div>
+        </div> -->
 
         <!-- RANK STATUS -->
         <div class="row my-3 justify-content-center">
@@ -62,7 +68,7 @@
                         <small>ACHIEVEMENTS</small>
                     </div>
                     <div class="card-body text-center">
-                        <h1><strong>{{ $events->count() }}</strong></h1>
+                        <h1><strong>{{ $competitions->count() }}</strong></h1>
                     </div>
                 </div>
             </div>
@@ -82,7 +88,7 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         @if ( $events->count() < 1)
-                            Woops! It seems that you haven't participated in any!
+                            <h4 class="my-4 text-center"> Woops! It seems that you haven't participated in any! </h4>
                         @else
                             <table class="table">
                                     <thead class="table-header">
@@ -188,7 +194,7 @@
                 <h4>Competition Achievement</h4>
             </div>
             <div class="col-md-2">
-                <a href="/achieve/create" class="btn float-right btn-success">Add New</a>
+                <a href="/competition/create" class="btn float-right btn-success">Add New</a>
             </div>
         </div>
         <div class="row my-3 justify-content-center">
@@ -207,7 +213,7 @@
                                     <th>Action</th>
                                 </thead>
                         @endif
-                            @foreach ($competitions as $comeptition)
+                            @foreach ($competitions as $competition)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $competition->competition_name }}</td>

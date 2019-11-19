@@ -30,7 +30,7 @@ class AddUserIdToCompetitions extends Migration
     public function down()
     {
         Schema::table('competitions', function (Blueprint $table) {
-            //
+            $table->dropColumn('user_id');
         });
     }
 }

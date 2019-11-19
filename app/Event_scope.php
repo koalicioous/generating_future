@@ -13,7 +13,7 @@ class Event_scope extends Model
     }
 
     public function competitions(){
-        return $this->belongsTo('\App\Competition','event_scope_id','event_scope_id');
+        return $this->hasMany('\App\Competition','event_scope_id','event_scope_id');
     }
 
 }

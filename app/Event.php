@@ -13,10 +13,10 @@ class Event extends Model
     ];
 
     public function event_type(){
-        return $this->hasOne('App\Event_type','event_type_id','event_type_id');
+        return $this->belongsTo('App\Event_type','event_type_id','event_type_id');
     }
 
     public function event_scope(){
-        return $this->hasOne('App\Event_scope','event_scope_id','event_scope_id');
+        return $this->belongsTo('App\Event_scope','event_scope_id','event_scope_id');
     }
 }
