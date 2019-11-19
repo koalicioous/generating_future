@@ -8,10 +8,14 @@ use App\Event_type;
 use App\Http\Requests\eventRequest;
 use App\Event;
 use App\Competition;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
+
+    private $scope;
+
     /**
      * Display a listing of the resource.
      *
@@ -51,6 +55,14 @@ class EventController extends Controller
     public function store(eventRequest $request)
     {
         
+        $this->scope = $request->event_scope;
+        $this->sumScore($this->scope);
+        
+        User::where('id',Auth::id())
+        ->update([
+            'point' => Auth::user()->point += $this->scope
+        ]);
+        
         Event::create([
             'event_name' => $request->event_name,
             'event_desc' => $request->event_desc,
@@ -62,7 +74,8 @@ class EventController extends Controller
             'finish_date' => $request->finish_date,
             'user_id' => $request->user_id
         ]);
-        return redirect('/events')->with('saved','The Event is added to your Experiences');
+
+        return redirect('/events')->with('saved','The Event is added to your Experiences'); 
         
     }
 
@@ -152,8 +165,25 @@ class EventController extends Controller
         return redirect('/events')->with('deleted','Your Event is Succesfully deleted!');
     }
 
-    public function sumScore($scope,$prize)
+    public function sumScore($scope)
     {
-        
+        $score = 0;
+
+        switch($scope) {
+            case 1: 
+                $score = 75;
+                break;
+            case 2:
+                $score = 50;
+                break;
+            case 3:
+                $score = 25;
+                break;
+            default:
+                $score = 0;
+                break;
+        }
+
+        $this->scope = $score;
     }
 }

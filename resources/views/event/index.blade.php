@@ -22,13 +22,13 @@
             <strong>{{ session('deleted') }}</strong>
         </div>
         @endif
-        <!--
-        <div class="row my-4 justify-content-center">
+        
+        <div class="row my-4 justify-content-center text-center">
             <div class="col-md-10" style="color:#0c3f6b">
-                <h3><strong>Experience</strong></h3>
-                <p>This page explains the experience you had <br> and shows the competition atmosphere in Central Language Improvement</p>
+                <h3><strong>Experiences Record</strong></h3>
             </div>
-        </div> -->
+            <div class="divider"></div>
+        </div> 
 
         <!-- RANK STATUS -->
         <div class="row my-3 justify-content-center">
@@ -38,7 +38,7 @@
                         <small>RANK</small>
                     </div>
                     <div class="card-body text-center">
-                        <h1><strong>{{ $events->count() }}</strong></h1>
+                        <h4><strong>Unknown</strong></h4>
                     </div>
                 </div>
             </div>
