@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container">
+        @if (session('competition_deleted'))
+        <div class="alert alert-warning alert-block">
+            <strong>{{ session('competition_deleted') }}</strong>
+        </div>
+        @endif
         @if (session('competition_created'))
         <div class="alert alert-success alert-block">
             <strong>{{ session('competition_created') }}</strong>
@@ -219,7 +224,7 @@
                                     <td>{{ $competition->competition_name }}</td>
                                     <td>{{ $competition->scope->event_scope_name }}</td>
                                     <td>{{ $competition->prize->prize_name }}</td>
-                                    <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>
+                                    <td><button type="button" class="btn btn-danger btn-sm" onclick="handleCompetitionDelete({{ $competition->competition_id }})" >Delete</button></td>
                                 </tr>
                             @endforeach
                             </table>
@@ -231,7 +236,7 @@
 
 
 
-    <!-- DELETE MODAL -->
+    <!-- DELETE EVENT MODAL -->
     <form action="" method="post" id="deleteForm">
         @csrf
         @method('DELETE')
@@ -255,6 +260,31 @@
         </div>
     </form>
     </div>
+
+    <!-- DELETE COMPETITION PRIZE MODAL -->
+    <form action="" method="post" id="deleteCompetitionForm">
+        @csrf
+        @method('DELETE')
+        <div class="modal fade" id="deleteCompetitionModal" tabindex="-1" role="dialog" aria-labelledby="handleCompetitionDelete" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="handleCompetitionDelete"><strong>Delete Confirmation</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    Are you really mean to delete this Competition Prize?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No, cancel</button>
+                <button type="submits" class="btn btn-danger">Yes, Delete</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
 @endsection
 
 @section('scripts')
@@ -265,6 +295,13 @@
             form.action = '/events/' + id
             console.log('deleting',form)
             $('#deleteModal').modal('show')
+        }
+
+        function handleCompetitionDelete(id){
+            var form = document.getElementById('deleteCompetitionForm')
+            form.action = '/competition/' + id
+            console.log('deleting',form)
+            $('#deleteCompetitionModal').modal('show')
         }
     </script>
     

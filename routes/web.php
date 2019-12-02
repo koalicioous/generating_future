@@ -29,3 +29,4 @@ Route::DELETE('/events/{event}','EventController@destroy')->name('event.delete')
 
 Route::get('/competition/create','CompetitionController@create')->name('competition.create');
 Route::post('/competition','CompetitionController@store')->name('competition.store');
+Route::DELETE('/competition/{competition}','CompetitionController@destroy')->name('competition.delete');

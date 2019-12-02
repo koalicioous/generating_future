@@ -8,7 +8,7 @@ class Competition extends Model
 {
     
     protected $fillable = ([
-        'competition_name','event_scope_id','prize_id','user_id'
+        'competition_name','event_scope_id','prize_id','user_id','competition_point'
     ]);
 
     public function scope(){
