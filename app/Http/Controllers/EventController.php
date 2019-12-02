@@ -11,6 +11,7 @@ use App\Competition;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
+
 class EventController extends Controller
 {
 

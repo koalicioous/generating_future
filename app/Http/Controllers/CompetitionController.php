@@ -41,6 +41,9 @@ class CompetitionController extends Controller
      */
     public function store(CompetitionRequest $request)
     {
+
+        return $request;
+        /*
         Competition::create([
             'competition_name' => $request->competition_name,
             'event_scope_id' => $request->competition_scope,
@@ -48,7 +51,7 @@ class CompetitionController extends Controller
             'user_id' => $request->user_id
         ]);
 
-        return redirect('events')->with('competition_created','Your Achievement is Successfully Listed');
+        return redirect('events')->with('competition_created','Your Achievement is Successfully Listed'); */
     }
 
     /**
