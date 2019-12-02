@@ -3,6 +3,12 @@
     Change Log 2 December 2019 :
 
         // yang perlu ditambahkan ke sistem
+            - Sistem scoring perlu dibenerin supaya lebih dinamis, scoringnya di controller tapi data score dari database
             - Setelah delete event, point user tidak berkurang.
             - Penambahan Achievement tidak menambah score
             - Delete Competition belum bisa.
+        // 
+
+        //
+        - Menambahkan poin ke Event_scopes
+        - Menambahkan poin ke event

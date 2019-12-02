@@ -9,7 +9,7 @@ use App\Event_scope;
 class Event extends Model
 {
     protected $fillable = [
-        'event_name','event_desc','event_city','event_country','start_date','finish_date','event_type_id','event_scope_id','user_id'
+        'event_name','event_desc','event_city','event_country','start_date','finish_date','event_type_id','event_scope_id','user_id','event_point'
     ];
 
     public function event_type(){

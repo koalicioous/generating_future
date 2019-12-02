@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
 
-    private $scope;
+    private $event_point;
 
     /**
      * Display a listing of the resource.
@@ -56,12 +56,11 @@ class EventController extends Controller
     public function store(eventRequest $request)
     {
         
-        $this->scope = $request->event_scope;
-        $this->sumScore($this->scope);
+        $this->sumScore($request->event_scope);
         
         User::where('id',Auth::id())
         ->update([
-            'point' => Auth::user()->point += $this->scope
+            'point' => Auth::user()->point += $this->event_point
         ]);
         
         Event::create([
@@ -73,10 +72,11 @@ class EventController extends Controller
             'event_type_id' => $request->event_type,
             'start_date' => $request->start_date,
             'finish_date' => $request->finish_date,
-            'user_id' => $request->user_id
+            'user_id' => $request->user_id,
+            'event_point' => $this->event_point
         ]);
 
-        return redirect('/events')->with('saved','The Event is added to your Experiences'); 
+        return redirect('/events')->with('saved','The Event is added to your Experiences and you gain ' . $this->event_point . ' points' ); 
         
     }
 
@@ -159,32 +159,34 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
+
+        $this->subScore($id);
+
+        User::where('id',Auth::id())
+        ->update([
+            'point' => Auth::user()->point -= $this->event_point
+        ]);
+
         $target = \App\Event::where('event_id',$id);
- 
         $target->delete();
 
-        return redirect('/events')->with('deleted','Your Event is Succesfully deleted!');
+        return redirect('/events')->with('deleted','Your Event is Succesfully deleted! and you loose ' . $this->event_point . ' points'); 
     }
 
-    public function sumScore($scope)
+    public function sumScore($id)
     {
-        $score = 0;
+        $this->event_point = 0;
 
-        switch($scope) {
-            case 1: 
-                $score = 75;
-                break;
-            case 2:
-                $score = 50;
-                break;
-            case 3:
-                $score = 25;
-                break;
-            default:
-                $score = 0;
-                break;
-        }
+        $event_scope_score = \App\Event_scope::where('event_scope_id',$id)->first();
+        $this->event_point = $event_scope_score->point;
+        
+    }
 
-        $this->scope = $score;
+    public function subScore($id)
+    {
+        $this->event_point = 0;
+        $target = \App\Event::where('event_id',$id)->first();
+
+        $this->event_point = $target->event_point;
     }
 }
